@@ -1,6 +1,6 @@
 part of 'user_bloc.dart';
 
-/// Clase sellada de la tareas
+/// Clase sellada de usuario
 sealed class UserEvent extends Equatable {
   const UserEvent();
 
@@ -8,36 +8,36 @@ sealed class UserEvent extends Equatable {
   List<Object> get props => [];
 }
 
-// Evento obtener listado tareas
+// Evento obtener listado usuarios
 class GetUsersEvent extends UserEvent {
   const GetUsersEvent();
 }
 
-/// Evento obtener listado tareas exitoso
+/// Evento obtener listado usuarios exitoso
 class GetUsersSuccessEvent extends UserEvent {
   const GetUsersSuccessEvent(this.dictionary);
   final Map<String, UserModel> dictionary;
 }
 
-/// Evento obtener listado tareas erroneo
+/// Evento obtener listado usuarios erroneo
 class GetUsersErrorEvent extends UserEvent {
   const GetUsersErrorEvent(this.message);
   final String message;
 }
 
-/// Evento crear tarea
+/// Evento crear usuario
 class CreateUserEvent extends UserEvent {
   const CreateUserEvent(this.user);
   final UserModel user;
 }
 
-/// Evento editar tarea
+/// Evento editar usuario
 class EditUserEvent extends UserEvent {
   const EditUserEvent(this.user);
   final UserModel user;
 }
 
-/// Evento eliminar tarea
+/// Evento eliminar usuario
 class DeleteUserEvent extends UserEvent {
   const DeleteUserEvent(this.id);
   final String id;

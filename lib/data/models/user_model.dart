@@ -6,9 +6,9 @@ import 'package:flutter_form/models/models.dart';
 /// Crea instancia de UserModel a partir de json
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-/// Modelo de la tarea
+/// Modelo del usuario
 class UserModel extends User {
-  /// Crea una instancia de TaskModel
+  /// Crea una instancia de UserModel
   const UserModel({
     required super.id,
     required super.name,

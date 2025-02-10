@@ -6,7 +6,7 @@ import 'package:flutter_form/data/models/models.dart';
 part 'user_event.dart';
 part 'user_state.dart';
 
-/// Bloc de la tarea
+/// Bloc de usuario
 class UserBloc extends Bloc<UserEvent, UserState> {
   /// Crea una instancia de UserBloc
   UserBloc() : super(const UserInitial({}, '')) {
@@ -39,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     add(DeleteUserEvent(id));
   }
 
-  /// Obtiene la lista de tareas a partir de [UserDataSource]
+  /// Obtiene la lista de usuarios a partir de [UserDataSource]
   void _onGetList(GetUsersEvent event, Emitter<UserState> emit) async {
     try {
       emit(GetUserInProgress(state.dictionary, state.messageError));
@@ -64,7 +64,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  /// Crea tarea
+  /// Crea usuario
   void _onCreate(CreateUserEvent event, Emitter<UserState> emit) async {
     emit(GetUserInProgress(state.dictionary, state.messageError));
     Map<String, UserModel> currDictionary = _cloneDictionary(state.dictionary);
@@ -74,7 +74,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     add(GetUsersSuccessEvent(currDictionary));
   }
 
-  /// Edita tarea
+  /// Edita usuario
   void _onEdit(EditUserEvent event, Emitter<UserState> emit) async {
     emit(GetUserInProgress(state.dictionary, state.messageError));
     Map<String, UserModel> currDictionary = _cloneDictionary(state.dictionary);
@@ -82,7 +82,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     add(GetUsersSuccessEvent(currDictionary));
   }
 
-  /// Elimina tarea
+  /// Elimina usuario
   void _onDelete(DeleteUserEvent event, Emitter<UserState> emit) async {
     emit(GetUserInProgress(state.dictionary, state.messageError));
     Map<String, UserModel> currDictionary = _cloneDictionary(state.dictionary);

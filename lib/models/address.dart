@@ -1,9 +1,16 @@
+/// Modelo de Direccion
+///   Parámetros:
+///   * [street] Direccion
+///   * [city] Ciudad
+///   * [state] Estado
+///   * [zipCode] Codigo postal
 class Address {
   final String street;
   final String city;
   final String state;
   final String zipCode;
 
+  /// Crea una instancia de Address
   Address({
     required this.street,
     required this.city,
@@ -11,6 +18,7 @@ class Address {
     required this.zipCode,
   });
 
+  /// Crea json a partir de [Address]
   Map<String, dynamic> toJson() => {
         'street': street,
         'city': city,
@@ -18,6 +26,7 @@ class Address {
         'zipCode': zipCode,
       };
 
+  /// Crea [Address] a partir de json
   factory Address.fromJson(Map<String, dynamic> json) => Address(
         street: json['street'],
         city: json['city'],

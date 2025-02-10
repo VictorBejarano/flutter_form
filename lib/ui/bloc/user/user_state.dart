@@ -1,6 +1,6 @@
 part of 'user_bloc.dart';
 
-// Clase sellada del estado de la tarea
+// Clase sellada del estado de usuario
 sealed class UserState extends Equatable {
   const UserState(this.dictionary, this.messageError);
   final Map<String, UserModel> dictionary;
@@ -10,7 +10,7 @@ sealed class UserState extends Equatable {
   List<Object> get props => [messageError];
 }
 
-/// Estado tarea inicial
+/// Estado usuario inicial
 final class UserInitial extends UserState {
   const UserInitial(super.dictionary, super.messageError);
 }
