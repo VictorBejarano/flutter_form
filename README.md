@@ -1,7 +1,7 @@
 # Flutter ToDo
 
 <p align="center">
-  <img src="https://github.com/VictorBejarano/flutter_form/blob/main/assets/images/logo.png?raw=true" width="200px" height="200px" alt="NxDevTools logo">
+  <img src="https://github.com/VictorBejarano/flutter_form/blob/main/assets/images/logo.png?raw=true" width="400px" height="400px" alt="NxDevTools logo">
 </p>
 
 ### Temas
