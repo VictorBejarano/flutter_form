@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form/data/models/user_model.dart';
 import 'package:flutter_form/models/mode_form.dart';
-import 'package:flutter_form/models/task_bloc.dart';
+import 'package:flutter_form/ui/bloc/user/user_bloc.dart';
 import 'package:flutter_form/ui/pages/form_page/widgets/address_form_field.dart';
 import 'package:flutter_form/ui/pages/form_page/controllers/address_controller.dart';
 import 'package:flutter_form/ui/pages/form_page/controllers/form_controller.dart';
 import 'package:flutter_form/ui/pages/form_page/widgets/form_widgets.dart';
-import 'package:flutter_form/ui/pages/form_page/mappers/task_state_mapper.dart';
 import 'package:flutter_form/ui/pages/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 
@@ -22,11 +22,9 @@ class FormPage extends StatefulWidget {
 
 class _FormPageState extends State<FormPage> {
   final FormController _controller = FormController();
-  final TaskStateMapper _stateMapper = DefaultTaskStateMapper();
 
   ModeForm? _mode;
   late String _id;
-  String? _dropdownValue;
 
   @override
   void didChangeDependencies() {
@@ -49,16 +47,15 @@ class _FormPageState extends State<FormPage> {
 
   void _loadTaskData(String id) {
     _id = id;
-    final task = context.read<TaskBloc>().state.dictionary[id]!;
+    final user = context.read<UserBloc>().state.dictionary[id]!;
 
-    _controller.name.text = task.title;
-    _controller.secondName.text = task.employeeName;
-    _controller.bornDate.text = task.endDate;
-    _dropdownValue = _stateMapper.getStateFromEnum(task.state);
+    _controller.name.text = user.name;
+    _controller.secondName.text = user.secondName;
+    _controller.bornDate.text = user.bornDate;
 
     // Cargar direcciones existentes
     _controller.addressControllers.clear();
-    for (var address in task.addresses) {
+    for (var address in user.addresses) {
       final addressController = AddressController();
       addressController.fromAddress(address);
       _controller.addressControllers.add(addressController);
@@ -96,17 +93,15 @@ class _FormPageState extends State<FormPage> {
         .map((controller) => controller.toAddress())
         .toList();
 
-    // context.read<TaskBloc>().createTask(
-    //   TaskModel(
-    //     id: '',
-    //     title: _controller.titleController.text,
-    //     employeeName: _controller.employeeNameController.text,
-    //     endDate: _controller.dateController.text,
-    //     observations: _controller.observationsController.text,
-    //     state: TaskStateEnum.pending,
-    //     addresses: addresses, // Agregar las direcciones
-    //   ),
-    // );
+    context.read<UserBloc>().createUser(
+          UserModel(
+            id: '',
+            name: _controller.name.text,
+            secondName: _controller.secondName.text,
+            bornDate: _controller.bornDate.text,
+            addresses: addresses, // Agregar las direcciones
+          ),
+        );
 
     Navigator.pop(context);
   }
@@ -118,23 +113,21 @@ class _FormPageState extends State<FormPage> {
         .map((controller) => controller.toAddress())
         .toList();
 
-    // context.read<TaskBloc>().editTask(
-    //   TaskModel(
-    //     id: _id,
-    //     title: _controller.titleController.text,
-    //     employeeName: _controller.employeeNameController.text,
-    //     endDate: _controller.dateController.text,
-    //     observations: _controller.observationsController.text,
-    //     state: _stateMapper.getEnumFromState(_dropdownValue!),
-    //     addresses: addresses, // Agregar las direcciones
-    //   ),
-    // );
+    context.read<UserBloc>().editUser(
+          UserModel(
+            id: _id,
+            name: _controller.name.text,
+            secondName: _controller.secondName.text,
+            bornDate: _controller.bornDate.text,
+            addresses: addresses, // Agregar las direcciones
+          ),
+        );
 
     Navigator.pop(context);
   }
 
   void _handleDelete() {
-    // context.read<TaskBloc>().deleteTask(_id);
+    context.read<UserBloc>().deleteUser(_id);
     Navigator.pop(context);
   }
 
@@ -157,10 +150,6 @@ class _FormPageState extends State<FormPage> {
                   controller: _controller,
                   mode: _mode!,
                   onDateTap: _selectDate,
-                  dropdownValue: _dropdownValue,
-                  onDropdownChanged: (value) {
-                    setState(() => _dropdownValue = value);
-                  },
                 ),
                 const SizedBox(height: 20),
                 Text(
@@ -219,11 +208,11 @@ class _FormPageState extends State<FormPage> {
   String _getPageTitle() {
     switch (_mode) {
       case ModeForm.create:
-        return 'Crear tarea';
+        return 'Crear Usuario';
       case ModeForm.edit:
-        return 'Editar tarea';
+        return 'Editar Usuario';
       case ModeForm.view:
-        return 'Ver tarea';
+        return 'Ver Usuario';
       default:
         return 'ERROR';
     }
@@ -243,12 +232,12 @@ class _FormPageState extends State<FormPage> {
       case ModeForm.create:
         return ElevatedButton(
           onPressed: _handleCreate,
-          child: const Text('CREAR TAREA'),
+          child: const Text('CREAR USUARIO'),
         );
       case ModeForm.edit:
         return ElevatedButton(
           onPressed: _handleEdit,
-          child: const Text('EDITAR TAREA'),
+          child: const Text('EDITAR USUARIO'),
         );
       case ModeForm.view:
         return ElevatedButton(
