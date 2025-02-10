@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form/ui/pages/list_page/list_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form/ui/bloc/user/user_bloc.dart';
+import 'package:flutter_form/ui/pages/list_page/list_user_page.dart';
 import 'package:flutter_form/ui/routes.dart';
 
 /// Clase app principal
@@ -9,14 +11,21 @@ class App extends StatelessWidget {
   /// Metodo para construir el widget
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Form',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => UserBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Form',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+          useMaterial3: true,
+        ),
+        initialRoute: ListUserPage.route,
+        routes: routes,
       ),
-      initialRoute: ListFormPage.route,
-      routes: routes,
     );
   }
 }

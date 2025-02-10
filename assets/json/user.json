@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "name": "Luis Andres",
+    "second_name": "Perez Camargo",
+    "born_date": "08/08/1994",
+    "addresses": [
+      {
+        "street": "Calle 5 # 3 - 3",
+        "city": "Bogotá",
+        "state": "Bogota D.C",
+        "zipCode": "11921"
+      }
+    ]
+  }
+]
