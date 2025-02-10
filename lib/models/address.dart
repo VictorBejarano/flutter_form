@@ -31,6 +31,6 @@ class Address {
         street: json['street'],
         city: json['city'],
         state: json['state'],
-        zipCode: json['zipCode'],
+        zipCode: json['zip_code'],
       );
 }
