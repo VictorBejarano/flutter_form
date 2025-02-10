@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form/ui/bloc/user/user_bloc.dart';
-import 'package:flutter_form/ui/pages/list_page/list_user_page.dart';
+import 'package:flutter_form/ui/pages/home_page/home_page.dart';
 import 'package:flutter_form/ui/routes.dart';
 
 /// Clase app principal
@@ -23,7 +23,7 @@ class App extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
           useMaterial3: true,
         ),
-        initialRoute: ListUserPage.route,
+        initialRoute: HomePage.route,
         routes: routes,
       ),
     );
